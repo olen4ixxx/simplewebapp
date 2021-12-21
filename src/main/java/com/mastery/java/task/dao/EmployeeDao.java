@@ -41,7 +41,7 @@ public class EmployeeDao {
         try (Statement statement = connection.createStatement()) {
             String query = "SELECT * FROM employee";
             ResultSet resultSet = statement.executeQuery(query);
-
+            
             while (resultSet.next()) {
                 Employee employee = new Employee();
                 EmployeeService.setEmployee(employee, resultSet);
