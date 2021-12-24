@@ -6,16 +6,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 @Component
 public class EmployeeDao {
     private static final Logger log = LogManager.getLogger();
-    private static final String URL = "jdbc:postgresql://localhost:5432/employeedb";
-    private static final String username = "postgres";
-    private static final String password = "root";
     private static final String INIT_QUERY = """
             CREATE TABLE IF NOT EXISTS employee (
                 id BIGSERIAL PRIMARY KEY,
@@ -31,13 +31,25 @@ public class EmployeeDao {
     private Connection connection;
 
     {
+        Properties properties = new Properties();
+        ClassLoader classLoader = EmployeeDao.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("application.properties");
         try {
-            Class.forName("org.postgresql.Driver");
+            properties.load(inputStream);
+        } catch (IOException e) {
+            log.error("Driver registration failed", e);
+        }
+        String url = (String) properties.get("db.url");
+        String username = (String) properties.get("db.username");
+        String password = (String) properties.get("db.password");
+        String driver = (String) properties.get("db.driver");
+        try {
+            Class.forName(driver);
         } catch (ClassNotFoundException e) {
             log.error("Driver registration failed", e);
         }
         try {
-            connection = DriverManager.getConnection(URL, username, password);
+            connection = DriverManager.getConnection(url, username, password);
             log.info("connection OK");
             Statement statement = connection.createStatement();
             statement.executeQuery(INIT_QUERY);

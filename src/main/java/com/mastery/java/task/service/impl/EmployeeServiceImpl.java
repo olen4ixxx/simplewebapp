@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private static final Logger log = LogManager.getLogger();
-    private EmployeeDao employeeDao;
+    private final EmployeeDao employeeDao;
 
     @Autowired
     public EmployeeServiceImpl(EmployeeDao employeeDao) {
