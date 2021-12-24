@@ -1,30 +1,21 @@
 package com.mastery.java.task.dto;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Employee {
-    private Long employeeId;
 
-    @NotEmpty(message = "First name should not be empty")
-    @Size(min = 2, max = 30, message = "First name should be between 2 and 30 characters")
+    private Long employeeId;
     private String firstName;
-    @NotEmpty(message = "Second name should not be empty")
-    @Size(min = 2, max = 30, message = "Second name should be between 2 and 30 characters")
     private String lastName;
-    @Min(value = 1, message = "Department ID should be greater than 1")
     private Long departmentId;
-    @NotEmpty(message = "Second name should not be empty")
-    @Size(min = 2, max = 30, message = "Second name should be between 2 and 30 characters")
     private String jobTitle;
     private Gender gender;
     private Timestamp dateOfBirth;
 
     public Employee() {
+
     }
 
     public Employee(Long employeeId, String firstName, String lastName, Long departmentId,
