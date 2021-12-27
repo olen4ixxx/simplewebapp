@@ -2,11 +2,9 @@ To deploy the application locally, first deploy Postgresql on port 5432 on the l
 
 ### Practical task
 
-Using the provided skeleton, implement the REST service.
+Application that provides REST API and allows you to perform CRUD operations on employees.
 
-Useful link: https://spring.io/guides/gs/rest-service/
-
-In addition you could use Swagger to provide API documentation.
+Stack: Java 17, Maven, Spring JDBC, Tomcat, Log4j, TestNG, Mockito, PostgreSQL, Lombok.
         
         
   
